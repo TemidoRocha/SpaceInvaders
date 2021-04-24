@@ -13,6 +13,7 @@ namespace SpaceInvaders
     {
         // Shape2D player;
         Sprite2D player;
+        Sprite2D player2;
 
         bool left;
         bool right;
@@ -53,6 +54,7 @@ namespace SpaceInvaders
             }
 
             player = new Sprite2D(new Vector2(30, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "shape test");
+            player2 = new Sprite2D(new Vector2(80, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "shape test");
         }
 
         public override void OnDraw()
@@ -77,6 +79,10 @@ namespace SpaceInvaders
             if (right)
             {
                 player.Position.X += 1f;
+            }
+            if(player.IsColliding(player, player2))
+            {
+                Log.Info("COL");
             }
         }
 
