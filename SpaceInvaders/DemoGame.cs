@@ -23,18 +23,8 @@ namespace SpaceInvaders
             player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "shape test");
         }
 
-        int time = 0;
         public override void OnUpdate()
         {
-            if (time > 400)
-            {
-                if(player != null)
-                {
-                    player.DestroySelf();
-                    player = null;
-                }
-            }
-            time++;
         }
     }
 }
