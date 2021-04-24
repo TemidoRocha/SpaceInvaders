@@ -8,18 +8,18 @@ namespace SpaceInvaders.ExpressedEngine
 {
     public class Vector2
     {
-        public float x { get; set; }
-        public float y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
 
         public Vector2()
         {
-            x = Zero().x;
-            y = Zero().y;
+            X = Zero().X;
+            Y = Zero().Y;
         }
         public Vector2(float x, float y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>

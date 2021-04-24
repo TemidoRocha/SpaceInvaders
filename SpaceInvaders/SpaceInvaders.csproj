@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="DemoGame.cs" />
     <Compile Include="ExpressedEngine\ExpressedEngine.cs" />
+    <Compile Include="ExpressedEngine\Shape2D.cs" />
     <Compile Include="ExpressedEngine\Vector2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
