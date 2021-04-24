@@ -22,7 +22,10 @@ namespace SpaceInvaders.ExpressedEngine
             this.y = y;
         }
 
-
+        /// <summary>
+        /// Returns X & Y as 0
+        /// </summary>
+        /// <returns></returns>
         public static Vector2 Zero()
         {
             return new Vector2(0, 0);
