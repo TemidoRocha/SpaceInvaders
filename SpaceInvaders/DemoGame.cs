@@ -14,6 +14,7 @@ namespace SpaceInvaders
         // Shape2D player;
         Sprite2D player;
         Sprite2D player2;
+        Vector2 lastPos = Vector2.Zero();
 
         bool left;
         bool right;
@@ -53,8 +54,8 @@ namespace SpaceInvaders
                 }
             }
 
-            player = new Sprite2D(new Vector2(30, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "shape test");
-            player2 = new Sprite2D(new Vector2(80, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "shape test");
+            player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+            // player2 = new Sprite2D(new Vector2(80, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player2");
         }
 
         public override void OnDraw()
@@ -80,9 +81,19 @@ namespace SpaceInvaders
             {
                 player.Position.X += 1f;
             }
-            if(player.IsColliding(player, player2))
+            //if(player.IsColliding(player, player2))
+            //{
+            //    Log.Info("COLLIDING with player");
+            //}
+            if (player.IsColliding("Ground"))
             {
-                Log.Info("COL");
+                player.Position.X = lastPos.X;
+                player.Position.Y = lastPos.Y;
+            }
+            else
+            {
+                lastPos.X = player.Position.X;
+                lastPos.Y = player.Position.Y;
             }
         }
 
