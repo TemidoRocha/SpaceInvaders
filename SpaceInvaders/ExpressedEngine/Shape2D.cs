@@ -18,11 +18,13 @@ namespace SpaceInvaders.ExpressedEngine
             this.Scale = Scale;
             this.Tag = Tag;
 
+            Log.Info($"[SHAPE2D]({Tag}) - Has been registered.");
             ExpressedEngine.RegisterShape(this);
         }
 
         public void DestroySelf()
         {
+            Log.Info($"[SHAPE2D]({Tag}) - Has been destroyed.");
             ExpressedEngine.UnRegisterShape(this);
         }
     }

@@ -20,17 +20,21 @@ namespace SpaceInvaders
 
         public override void OnLoad()
         {
-            Console.WriteLine("onload works");
             player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "shape test");
         }
 
-        int frame = 0;
-        float x = 0.1f;
+        int time = 0;
         public override void OnUpdate()
         {
-            Console.WriteLine($"Frame Count: {frame}");
-            player.Position.X += x;
-            frame++;
+            if (time > 400)
+            {
+                if(player != null)
+                {
+                    player.DestroySelf();
+                    player = null;
+                }
+            }
+            time++;
         }
     }
 }
