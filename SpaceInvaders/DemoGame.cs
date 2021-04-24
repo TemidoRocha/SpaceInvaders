@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SpaceInvaders.ExpressedEngine;
 
 namespace SpaceInvaders
@@ -11,15 +12,23 @@ namespace SpaceInvaders
     class DemoGame : ExpressedEngine.ExpressedEngine
     {
         // Shape2D player;
-        // Sprite2D player;
+        Sprite2D player;
+
+        bool left;
+        bool right;
+        bool down;
+        bool up;
         string[,] Map =
         {
-            {".",".",".",".",".",".",".","." },
-            {".",".",".",".",".",".",".","." },
-            {".",".",".",".",".",".",".","." },
-            {".",".",".","g",".",".","g","." },
-            {"g","g","g","g","g","g","g","g" },
-            {".",".",".",".",".",".",".","." },
+            {"g","g","g","g","g","g","g" },
+            {"g",".",".",".",".",".","g" },
+            {"g",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".","g" },
+            {"g",".","g","g",".",".","g" },
+            {"g",".",".","g",".",".","g" },
+            {"g",".",".","g",".",".","g" },
+            {"g",".",".","g",".",".","g" },
+            {"g","g","g","g","g","g","g" },
         };
         public DemoGame() : base(new Vector2(615, 515), "Space Invaders") { }
 
@@ -36,21 +45,56 @@ namespace SpaceInvaders
                 {
                     if(Map[j, i] == "g")
                     {
-                        new Sprite2D(new Vector2(i*50, j*50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_02", "Ground");
+                        new Sprite2D(new Vector2(i*50, j*50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
 
                     }
 
                 }
             }
+
+            player = new Sprite2D(new Vector2(30, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "shape test");
         }
 
         public override void OnDraw()
         {
+
         }
 
         public override void OnUpdate()
         {
+            if (up)
+            {
+                player.Position.Y -= 1f;
+            }
+            if (down)
+            {
+                player.Position.Y += 1f;
+            }
+            if (left)
+            {
+                player.Position.X -= 1f;
+            }
+            if (right)
+            {
+                player.Position.X += 1f;
+            }
+        }
 
+        public override void GetKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W) { up = true; };
+            if (e.KeyCode == Keys.S) { down = true; };
+            if (e.KeyCode == Keys.A) { left = true; };
+            if (e.KeyCode == Keys.D) { right = true; };
+
+        }
+
+        public override void GetKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.W) { up = false; };
+            if (e.KeyCode == Keys.S) { down = false; };
+            if (e.KeyCode == Keys.A) { left = false; };
+            if (e.KeyCode == Keys.D) { right = false; };
         }
     }
 }
