@@ -10,17 +10,19 @@ namespace SpaceInvaders
 {
     class DemoGame : ExpressedEngine.ExpressedEngine
     {
-        Shape2D player;
+        Sprite2D player;
         public DemoGame() : base(new Vector2(615, 515), "Space Invaders") { }
-
-        public override void OnDraw()
-        {
-            BackgroundColor = Color.Black;
-        }
 
         public override void OnLoad()
         {
-            player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "shape test");
+            BackgroundColor = Color.Black;
+
+            //player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "shape test");
+            player = new Sprite2D(new Vector2(10, 10), new Vector2(10, 10), "Players/Player Green/playerGreen_swim2", "shape test");
+        }
+
+        public override void OnDraw()
+        {
         }
 
         public override void OnUpdate()

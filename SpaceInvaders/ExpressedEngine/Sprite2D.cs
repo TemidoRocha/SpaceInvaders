@@ -22,6 +22,11 @@ namespace SpaceInvaders.ExpressedEngine
             this.Directory = Directory;
             this.Tag = Tag;
 
+            // csharpSpaceInvaders\SpaceInvaders\SpaceInvaders\bin\Debug\Assets\Sprites
+            Image tmp = Image.FromFile($"Assets/Sprites/{Directory}.png");
+            Bitmap sprite = new Bitmap(tmp, (int)this.Scale.X, (int)this.Scale.Y);
+            Sprite = sprite;
+            
             Log.Info($"[SPRITE2D]({Tag}) - Has been registered.");
             ExpressedEngine.RegisterSprite(this);
         }
