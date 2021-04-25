@@ -22,46 +22,56 @@ namespace SpaceInvaders
         bool up;
         string[,] Map =
         {
-            {"g","g","g","g","g","g","g" },
-            {"g",".",".",".",".",".","g" },
-            {"g","c",".",".","c",".","g" },
-            {"g",".",".","g",".",".","g" },
-            {"g",".","g","g","c",".","g" },
-            {"g",".",".","g",".",".","g" },
-            {"g",".",".","g",".",".","g" },
-            {"g",".",".","g",".",".","g" },
-            {"g","g","g","g","g","g","g" },
+            {"g","g","g","g","g","g","g","g","g","g","g","g","g","g","g","g" },
+            {"g",".",".",".",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g","c",".",".","c",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".","g","g","c",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".","g","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".",".",".",".",".",".",".",".",".",".",".","g" },
+            {"g",".",".","g",".","p",".",".",".",".",".",".",".",".",".","g" },
+            {"g","g","g","g","g","g","g","g","g","g","g","g","g","g","g","g" },
         };
         public DemoGame() : base(new Vector2(615, 515), "Space Invaders") { }
 
         public override void OnLoad()
         {
             BackgroundColor = Color.Black;
-            CameraPosition.X = 100;
-
+            CameraZoom = new Vector2(.75f, .7f);
             // player = new Shape2D(new Vector2(10, 10), new Vector2(10, 10), "shape test");
             // player = new Sprite2D(new Vector2(10, 10), new Vector2(36, 45), "Players/Player Green/playerGreen_swim2", "shape test");
-            for (int i = 0; i<Map.GetLength(1); i++)
+            for (int i = 0; i < Map.GetLength(1); i++)
             {
                 for (int j = 0; j < Map.GetLength(0); j++)
                 {
-                    if(Map[j, i] == "g")
+                    if (Map[j, i] == "g")
                     {
-                        new Sprite2D(new Vector2(i*50, j*50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
 
                     }
 
-                    
+
                     if (Map[j, i] == "c")
                     {
                         new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(15, 15), "Items/yellowCrystal", "Coin");
 
                     }
 
+                    if (Map[j, i] == "p")
+                    {
+                        player = new Sprite2D(new Vector2(i * 50, j * 20), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+
+                    }
+
                 }
             }
 
-            player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
+            // player = new Sprite2D(new Vector2(100, 100), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player");
             // player2 = new Sprite2D(new Vector2(80, 30), new Vector2(30, 40), "Players/Player Green/playerGreen_walk1", "Player2");
         }
 
@@ -72,6 +82,7 @@ namespace SpaceInvaders
 
         public override void OnUpdate()
         {
+            if (player == null) return;
             if (up)
             {
                 player.Position.Y -= 1f;
