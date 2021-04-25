@@ -20,8 +20,14 @@
                     OnDraw();                    Window.BeginInvoke((MethodInvoker)delegate { Window.Refresh(); });                    OnUpdate();                    // this delay is needed in order for the windows to refresh,                    // otherwise willl refresh on the top of the previous state                    Thread.Sleep(1);
                 }                catch
                 {
-                    Log.Error("Game has not been found.");
-                }            }        }        private void Renderer(object sender, PaintEventArgs e)        {            Graphics g = e.Graphics;            // this will be our backgroud color and the first thing to draw            g.Clear(BackgroundColor);            g.TranslateTransform(CameraPosition.X, CameraPosition.Y);            g.RotateTransform(CameraAngle);            foreach (Shape2D shape in AllShapes)            {                g.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);            }            foreach(Sprite2D sprite in AllSprites)
+                    Log.Error("[ERROR] - Game has not been found.");
+                }            }        }        private void Renderer(object sender, PaintEventArgs e)        {            Graphics g = e.Graphics;            // this will be our backgroud color and the first thing to draw            g.Clear(BackgroundColor);            g.TranslateTransform(CameraPosition.X, CameraPosition.Y);            g.RotateTransform(CameraAngle);            try
             {
-                g.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
+                foreach (Shape2D shape in AllShapes)                {                    g.FillRectangle(new SolidBrush(Color.Red), shape.Position.X, shape.Position.Y, shape.Scale.X, shape.Scale.Y);                }                foreach(Sprite2D sprite in AllSprites)
+                {
+                    g.DrawImage(sprite.Sprite, sprite.Position.X, sprite.Position.Y, sprite.Scale.X, sprite.Scale.Y);
+                }
+            }            catch
+            {
+                Log.Error("[ERROR] - Shapes and sprites are not being loaded.");
             }        }        /// <summary>        /// here we load everything we need before the game starts        /// (sprites....)        /// </summary>        public abstract void OnLoad();        /// <summary>        /// anything regarding drawing should enter here        /// </summary>        public abstract void OnDraw();        /// <summary>        /// anything regarding movements, phisics should enter here        /// </summary>        public abstract void OnUpdate();        public abstract void GetKeyDown(KeyEventArgs e);        public abstract void GetKeyUp(KeyEventArgs e);    }}

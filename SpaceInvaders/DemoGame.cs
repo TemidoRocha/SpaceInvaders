@@ -24,9 +24,9 @@ namespace SpaceInvaders
         {
             {"g","g","g","g","g","g","g" },
             {"g",".",".",".",".",".","g" },
-            {"g",".",".",".",".",".","g" },
+            {"g","c",".",".","c",".","g" },
             {"g",".",".","g",".",".","g" },
-            {"g",".","g","g",".",".","g" },
+            {"g",".","g","g","c",".","g" },
             {"g",".",".","g",".",".","g" },
             {"g",".",".","g",".",".","g" },
             {"g",".",".","g",".",".","g" },
@@ -48,6 +48,13 @@ namespace SpaceInvaders
                     if(Map[j, i] == "g")
                     {
                         new Sprite2D(new Vector2(i*50, j*50), new Vector2(50, 50), "Tiles/Blue tiles/tileBlue_03", "Ground");
+
+                    }
+
+                    
+                    if (Map[j, i] == "c")
+                    {
+                        new Sprite2D(new Vector2(i * 50, j * 50), new Vector2(15, 15), "Items/yellowCrystal", "Coin");
 
                     }
 
@@ -85,7 +92,12 @@ namespace SpaceInvaders
             //{
             //    Log.Info("COLLIDING with player");
             //}
-            if (player.IsColliding("Ground"))
+            Sprite2D coin = player.IsColliding("Coin");
+            if (coin != null)
+            {
+                coin.DestroySelf();
+            }
+            if (player.IsColliding("Ground") != null)
             {
                 player.Position.X = lastPos.X;
                 player.Position.Y = lastPos.Y;
